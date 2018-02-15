@@ -1,0 +1,5 @@
+(deftemplate fragment  (slot from) (slot to)
+                                      (slot from_street_name) (slot to_street_name))
+(deftemplate car (slot location))
+(deftemplate obstables (slot location) (slot tlights) (slot cars)
+                                      (slot pedestrians) (slot spec_service))
