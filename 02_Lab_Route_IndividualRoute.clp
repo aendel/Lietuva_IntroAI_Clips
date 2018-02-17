@@ -44,25 +44,32 @@
 
 (defrule Check-Tlights
   (declare (salience 100))
-  ?street <- (obstacles ())
-  =>
-
+  ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
+  (test (> ?tlights 0))
+   =>
+   (printout t "Traffic light are not green, you must wait." crlf)
+   (modify ?street(tlights 0))
 )
 
 (defrule Check-Cars
   (declare (salience 100))
+  ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
+(test (> ?cars 0))
   =>
-
+(printout t "There are other cars in the street. Wait for them." crlf)
+(modify ?cars ?cars-1)
 )
 
 (defrule Check-Pedestrians
   (declare (salience 100))
+  ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
   =>
 
 )
 
 (defrule Check-Spec_service
   (declare (salience 100))
+  ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
   =>
 
 )
