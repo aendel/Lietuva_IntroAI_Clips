@@ -42,8 +42,27 @@
   (modify ?car (location ?unknown))
 )
 
-(defrule CheckStreet "Before go check the obstacles"
-  ()
+(defrule Check-Tlights
+  (declare (salience 100))
+  ?street <- (obstacles ())
+  =>
+
+)
+
+(defrule Check-Cars
+  (declare (salience 100))
+  =>
+
+)
+
+(defrule Check-Pedestrians
+  (declare (salience 100))
+  =>
+
+)
+
+(defrule Check-Spec_service
+  (declare (salience 100))
   =>
 
 )
