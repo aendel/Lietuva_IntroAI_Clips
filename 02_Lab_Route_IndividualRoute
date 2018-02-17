@@ -25,7 +25,8 @@
 )
 
 (defrule r1 "GO until the end"
-  ?p <- (car (location ?location))
+  ?car <- (car (location ?location))
+  ?to <- (fragment (from_street_name ?location) (to_street_name ?unknown))
   =>
-
+  (modify ?car (location ?unknown))
 )
