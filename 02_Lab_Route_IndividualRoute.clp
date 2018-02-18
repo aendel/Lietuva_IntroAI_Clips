@@ -66,7 +66,7 @@
 (test (> ?pedestrians 0))
   =>
 (printout t "There is at least one pedestrian in the street. Wait for them." crlf)
-(modify ?street(pedestrian 0))
+(modify ?street(pedestrians 0))
 )
 
 (defrule Check-Spec_service
