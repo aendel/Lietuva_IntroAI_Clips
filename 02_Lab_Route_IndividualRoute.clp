@@ -57,19 +57,23 @@
 (test (> ?cars 0))
   =>
 (printout t "There are other cars in the street. Wait for them." crlf)
-(modify ?cars ?cars-1)
+(modify ?street(cars 0))
 )
 
 (defrule Check-Pedestrians
   (declare (salience 100))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
   =>
-
+(test (> ?pedestrians 0))
+(printout t "There is at least one pedestrian in the street. Wait for them." crlf)
+(modify ?street(pedestrian 0))
 )
 
 (defrule Check-Spec_service
   (declare (salience 100))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
   =>
-
+(test (> ?pedestrian 0))
+(printout t "There are some special services in the street. Wait for them." crlf)
+(modify ?street(spec_service 0))
 )
