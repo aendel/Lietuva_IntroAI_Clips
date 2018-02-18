@@ -44,6 +44,7 @@
 
 (defrule Check-Tlights
   (declare (salience 100))
+  ?car <- (car (location ?location))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
   (test (> ?tlights 0))
    =>
@@ -53,6 +54,7 @@
 
 (defrule Check-Cars
   (declare (salience 100))
+  ?car <- (car (location ?location))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
 (test (> ?cars 0))
   =>
@@ -62,6 +64,7 @@
 
 (defrule Check-Pedestrians
   (declare (salience 100))
+  ?car <- (car (location ?location))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
 (test (> ?pedestrians 0))
   =>
@@ -71,6 +74,7 @@
 
 (defrule Check-Spec_service
   (declare (salience 100))
+  ?car <- (car (location ?location))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
 (test (> ?spec_service 0))
   =>
