@@ -20,13 +20,13 @@
 
 (deffacts my-obstacles
   (obstacles (location "Via Pacinotti,147") (tlights 0) (cars 0) (pedestrians 1) (spec_service 0))
-  (obstacles (location "Piazza S.Vito Martire,2") (tlights 0) (cars 0) (pedestrians 1) (spec_service 0))
-  (obstacles (location "Via Principe di Piemonte,3") (tlights 0) (cars 0) (pedestrians 1) (spec_service 0))
-  (obstacles (location "SP5i,1") (tlights 0) (cars 0) (pedestrians 1) (spec_service 0))
+  (obstacles (location "Piazza S.Vito Martire,2") (tlights 1) (cars 0) (pedestrians 1) (spec_service 0))
+  (obstacles (location "Via Principe di Piemonte,3") (tlights 0) (cars 1) (pedestrians 1) (spec_service 0))
+  (obstacles (location "SP5i,1") (tlights 1) (cars 0) (pedestrians 0) (spec_service 1))
   (obstacles (location "Via Pitrè,6") (tlights 0) (cars 0) (pedestrians 1) (spec_service 0))
-  (obstacles (location "Via Palermo,142") (tlights 0) (cars 0) (pedestrians 1) (spec_service 0))
-  (obstacles (location "Via Palermo,46") (tlights 0) (cars 0) (pedestrians 1) (spec_service 0))
-  (obstacles (location "Via Pacinotti,228") (tlights 0) (cars 0) (pedestrians 1) (spec_service 0))
+  (obstacles (location "Via Palermo,142") (tlights 1) (cars 1) (pedestrians 0) (spec_service 0))
+  (obstacles (location "Via Palermo,46") (tlights 0) (cars 0) (pedestrians 0) (spec_service 0))
+  (obstacles (location "Via Pacinotti,228") (tlights 0) (cars 0) (pedestrians 1) (spec_service 1))
 )
 
 (defrule Home "When your location is 'nil' you start from your home."
@@ -42,7 +42,7 @@
   (modify ?car (location ?unknown))
 )
 
-(defrule Check-Tlights
+(defrule Check-Tlights "Check traffic light before go"
   (declare (salience 100))
   ?car <- (car (location ?location))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
@@ -52,7 +52,7 @@
    (modify ?street(tlights 0))
 )
 
-(defrule Check-Cars
+(defrule Check-Cars "Check for other cars in the street"
   (declare (salience 100))
   ?car <- (car (location ?location))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
@@ -62,7 +62,7 @@
 (modify ?street(cars 0))
 )
 
-(defrule Check-Pedestrians
+(defrule Check-Pedestrians "Check pedestrians in the street"
   (declare (salience 100))
   ?car <- (car (location ?location))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
@@ -72,7 +72,7 @@
 (modify ?street(pedestrians 0))
 )
 
-(defrule Check-Spec_service
+(defrule Check-Spec_service "Check for special services in the street"
   (declare (salience 100))
   ?car <- (car (location ?location))
   ?street <- (obstacles (location ?location) (tlights ?tlights) (cars ?cars) (pedestrians ?pedestrians) (spec_service ?spec_service))
