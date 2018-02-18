@@ -39,6 +39,7 @@
   ?car <- (car (location ?location))
   ?to <- (fragment (from_street_name ?location) (to_street_name ?unknown))
   =>
+  (printout t "There is no obstacles in the street, you can go." crlf)
   (modify ?car (location ?unknown))
 )
 
