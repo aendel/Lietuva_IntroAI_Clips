@@ -29,7 +29,7 @@
   (obstacles (location "Via Pacinotti,228") (tlights 0) (cars 0) (pedestrians 1) (spec_service 1))
 )
 
-(defrule Home "When your location is 'nil' you start from a location chosen by the user."
+(defrule Home "When your location is 'nil'  start from a location chosen by the user."
   ?p <- (car (location nil))
   =>
   (printout t "Where do you want to go?" crlf)
