@@ -74,14 +74,17 @@
 )
 
 (defrule r8 "Mice reproduce while the cat is sleeping"
+(declare (salience 1))
   ?cat <- (cat (state "sleep"))
   ?mice <- (mouse (color ?color) (number ?number))
   (test (> ?number 1))
   =>
-  (bind ?chance (random(1 5)))
 ;  (if (= random(0 1) 1) then (modify ?mice(color white)
 ;  ))
-  (modify ?mice(number (+ ?number ?chance)))
+;(+ (mod (random) 6) 1)
+  ;(bind ?add (+ (mod (random) 5) 1))
+  (modify ?mice (number (+ (mod (random) 5) ?number)))
+)
 ; remove comments in JESS
 ;
 ; (reset)
