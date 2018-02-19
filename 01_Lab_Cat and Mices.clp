@@ -72,6 +72,16 @@
 =>
 (modify ?fact-id(state "dead"))
 )
+
+(defrule r8 "Mice reproduce while the cat is sleeping"
+  ?cat <- (cat (state "sleep"))
+  ?mice <- (mouse (color ?color) (number ?number))
+  (test (> ?number 1))
+  =>
+  (bind ?chance (random(1 5)))
+;  (if (= random(0 1) 1) then (modify ?mice(color white)
+;  ))
+  (modify ?mice(number (+ ?number ?chance)))
 ; remove comments in JESS
 ;
 ; (reset)
