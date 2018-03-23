@@ -1,7 +1,3 @@
-; remove comments in JESS
-;
-; (clear)
-
 (deftemplate mouse (slot color) (slot number) )
 (deftemplate cat (slot state) (slot eaten_mice_no) (slot days_without_mice) )
 
@@ -24,7 +20,6 @@
   ?fact-id2 <- (mouse (color ?color) (number ?number))
   (test (> ?number 0))
   =>
-
   (if (eq ?color white) then (printout t "py-py!" crlf)
                         else (printout t "pyyyyy" crlf))
   (modify ?fact-id2 (number (- ?number 1))  )
@@ -50,6 +45,7 @@
 )
 
 (defrule r5 "Fat cats after sleep become hungry and forget how many mice they ate"
+(declare (salience 1))
   ?fact-id1 <- (cat (state ?state) (eaten_mice_no ?eaten))
   (test (eq ?state "sleep"))
   =>
@@ -74,20 +70,12 @@
 )
 
 (defrule r8 "Mice reproduce while the cat is sleeping"
-(declare (salience 1))
-  ?cat <- (cat (state "sleep"))
+(declare (salience 2))
+  ?cat <- (cat (state ?state))
   ?mice <- (mouse (color ?color) (number ?number))
+  (test (eq ?state "sleep"))
   (test (> ?number 1))
+  (test(< ?number 6))
   =>
-;  (if (= random(0 1) 1) then (modify ?mice(color white)
-;  ))
-;(+ (mod (random) 6) 1)
-  ;(bind ?add (+ (mod (random) 5) 1))
   (modify ?mice (number (+ (mod (random) 5) ?number)))
 )
-; remove comments in JESS
-;
-; (reset)
-; (facts)
-; (watch all)
-; (run)
